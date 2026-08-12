@@ -188,6 +188,75 @@ export const tracks = [
   },
 ];
 
+export const featuredCases = [
+  {
+    id: 'legal-tech-portfolio',
+    track: 'Legal Operations',
+    title: '$1.25M legal technology portfolio',
+    company: 'Micron Technology',
+    period: '2023–2024',
+    problem: 'Twelve legal systems lacked unified ownership, ROI visibility, and a shared roadmap.',
+    outcome: '12 systems governed through a three-year technology roadmap.',
+    intervention:
+      'Centralized ownership, vendor evaluation, spend visibility, and roadmap planning.',
+  },
+  {
+    id: 'metadata-platform',
+    track: 'Data Governance',
+    title: '$1.5M metadata platform launch',
+    company: 'Micron Technology',
+    period: '2016–2017',
+    problem: 'A global data estate lacked a unified catalog, stewardship model, and discovery layer.',
+    outcome: '1,000+ databases cataloged with 95%+ adoption at scale.',
+    intervention:
+      'Selected the platform, established stewardship, and led global adoption.',
+  },
+  {
+    id: 'ariba-migration',
+    track: 'Program & Portfolio',
+    title: 'Ariba and SharePoint migration',
+    company: 'Micron Technology',
+    period: '2013–2016',
+    problem: 'Aging procurement platforms fragmented documents, permissions, and reporting.',
+    outcome: '40,000+ documents and 800+ sites migrated with zero data loss.',
+    intervention:
+      'Directed information architecture, permissions, migration, and reporting.',
+  },
+];
+
+export const careerStages = [
+  {
+    title: 'Early Operations',
+    period: '2002–2013',
+    role: 'Operations and procurement foundations',
+    detail: 'Workflow, supply chain, audit controls, and a $17M inventory reduction.',
+  },
+  {
+    title: 'Process & Systems Builder',
+    period: '2013–2016',
+    role: 'Business process analysis',
+    detail: 'Standardized procurement systems, information architecture, and migration controls.',
+  },
+  {
+    title: 'Technology & Data Integrator',
+    period: '2016–2021',
+    role: 'Metadata engineering and management',
+    detail: 'Connected catalogs, stewardship, adoption, and enterprise data discovery.',
+  },
+  {
+    title: 'Strategic Program Leader',
+    period: '2021–2024',
+    role: 'Information governance and legal technology',
+    detail: 'Scaled governance initiatives and a $1.25M legal technology portfolio.',
+  },
+  {
+    title: 'Today',
+    period: '2024–present',
+    role: 'Enterprise data strategy and governance',
+    detail: 'Aligning law, data, technology, and measurable business outcomes.',
+  },
+];
+
 export const credentials = [
   {
     name: 'CDMP',
@@ -200,5 +269,28 @@ export const credentials = [
   {
     name: 'LUMA Practitioner',
     detail: 'Human-Centered Design',
+  },
+];
+
+export const technologyGroups = [
+  {
+    name: 'Legal technology and CLM',
+    items: ['CLM and eBilling evaluation', 'Matter management', 'CLOC framework'],
+  },
+  {
+    name: 'Data governance and metadata',
+    items: ['Collibra', 'DAMA-DMBOK', 'Metadata catalogs and lineage'],
+  },
+  {
+    name: 'Workflow automation',
+    items: ['Microsoft Power Platform', 'Power Automate', 'SharePoint'],
+  },
+  {
+    name: 'Reporting and analytics',
+    items: ['Tableau', 'Power BI', 'Power Query and SQL'],
+  },
+  {
+    name: 'Integration and APIs',
+    items: ['SAP Ariba', 'iManage API', 'Enterprise system integration'],
   },
 ];

@@ -1,0 +1,25 @@
+---
+import { careerStages } from '../data/portfolio.mjs';
+---
+
+<section id="career" class="portfolio-section career-section" aria-labelledby="career-heading">
+  <div class="section-heading section-heading-inline">
+    <div>
+      <p class="section-label">Career timeline</p>
+      <h2 id="career-heading">Increasing scope, connected by systems thinking.</h2>
+    </div>
+    <p>From operational foundations to enterprise governance leadership.</p>
+  </div>
+
+  <ol class="career-strip">
+    {careerStages.map((stage) => (
+      <li>
+        <span class="career-dot" aria-hidden="true"></span>
+        <p class="career-period">{stage.period}</p>
+        <h3>{stage.title}</h3>
+        <p class="career-role">{stage.role}</p>
+        <p class="career-detail">{stage.detail}</p>
+      </li>
+    ))}
+  </ol>
+</section>

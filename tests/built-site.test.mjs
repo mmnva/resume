@@ -33,3 +33,18 @@ test('hero and identity rail match the approved recruiter-first concept', () => 
   assert.match(html, /https:\/\/github\.com\/mmnva\/resume/);
   assert.doesNotMatch(html, /Michael_McNea_Resume\.pdf/);
 });
+
+test('downstream sections are present and source-backed', () => {
+  for (const id of ['case-studies', 'career', 'credentials', 'contact']) {
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+
+  for (const value of ['$1.25M', '$1.5M', '40,000+', '$17M', 'February 2026']) {
+    assert.ok(html.includes(value), `missing downstream proof point: ${value}`);
+  }
+});
+
+test('public HTML contains no direct email or phone link', () => {
+  assert.doesNotMatch(html, /mailto:|tel:/i);
+  assert.doesNotMatch(html, /@gmail\.com|703[-\s.]?851[-\s.]?3700/i);
+});

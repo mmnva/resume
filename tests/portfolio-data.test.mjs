@@ -1,6 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { credentials, tracks } from '../src/data/portfolio.mjs';
+import {
+  careerStages,
+  credentials,
+  featuredCases,
+  technologyGroups,
+  tracks,
+} from '../src/data/portfolio.mjs';
 
 test('each role track exposes exactly three evidence frames', () => {
   assert.deepEqual(
@@ -49,4 +55,27 @@ test('certification date is current and only confirmed credentials are shown', (
     ),
   );
   assert.ok(credentials.every((item) => !item.detail.includes('expected Jan 2026')));
+});
+
+test('downstream recruiter content stays concise and source-backed', () => {
+  assert.equal(featuredCases.length, 3);
+  assert.deepEqual(featuredCases.map(({ track }) => track), [
+    'Legal Operations',
+    'Data Governance',
+    'Program & Portfolio',
+  ]);
+  assert.deepEqual(careerStages.map(({ title }) => title), [
+    'Early Operations',
+    'Process & Systems Builder',
+    'Technology & Data Integrator',
+    'Strategic Program Leader',
+    'Today',
+  ]);
+  assert.deepEqual(technologyGroups.map(({ name }) => name), [
+    'Legal technology and CLM',
+    'Data governance and metadata',
+    'Workflow automation',
+    'Reporting and analytics',
+    'Integration and APIs',
+  ]);
 });
