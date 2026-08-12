@@ -1,0 +1,90 @@
+---
+import { milestones } from '../data/timeline';
+
+const domainColors = {
+  legal: 'var(--color-legal)',
+  data: 'var(--color-data)',
+  ppm: 'var(--color-ppm)',
+  ai: 'var(--color-ai)',
+};
+
+// Layout: horizontal year axis with milestone markers
+const minYear = 2000;
+const maxYear = 2026;
+const totalYears = maxYear - minYear;
+const xForYear = (year: number) => ((year - minYear) / totalYears) * 100;
+---
+<section class="my-16" aria-labelledby="timeline-heading">
+  <div class="mb-6">
+    <h2 id="timeline-heading" class="mb-2">Impact Timeline</h2>
+    <p class="text-[var(--color-text-muted)] max-w-3xl">
+      How my work has evolved — 20+ years across procurement, IT, data governance, and legal technology. Click any milestone for context.
+    </p>
+  </div>
+
+  <div class="overflow-x-auto">
+    <div class="min-w-[900px] relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-8">
+      <!-- Year axis -->
+      <div class="absolute left-8 right-8 top-1/2 -translate-y-1/2 h-px bg-[var(--color-border)]"></div>
+
+      <!-- Year labels -->
+      <div class="absolute left-8 right-8 top-[calc(50%+12px)] flex justify-between text-xs font-mono text-[var(--color-text-subtle)]">
+        {[2002, 2008, 2014, 2020, 2026].map(y => (
+          <span>{y}</span>
+        ))}
+      </div>
+
+      <!-- Milestones — alternate above/below to avoid overlap -->
+      {milestones.map((m, idx) => {
+        const x = 8 + (xForYear(m.year) / 100) * 84; // 8% padding on each side
+        const isAbove = idx % 2 === 0;
+        const dotY = isAbove ? 'calc(50% - 80px)' : 'calc(50% + 16px)';
+        return (
+          <a
+            href={m.link || '#'}
+            class:list={["absolute group", m.link ? "cursor-pointer" : "cursor-default"]}
+            style={`left:${x}%; top:50%; transform:translate(-50%,-50%)`}
+          >
+            <div
+              class="w-3 h-3 rounded-full border-2 border-[var(--color-surface)] transition-transform group-hover:scale-150"
+              style={`background:${domainColors[m.domain]}`}
+              title={`${m.year}: ${m.role} at ${m.company}`}
+            ></div>
+
+            <div
+              class="absolute left-1/2 -translate-x-1/2 w-44 text-xs bg-[var(--color-surface)] border border-[var(--color-border)] rounded-md shadow-sm p-3 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10"
+              style={isAbove ? "bottom: 12px;" : "top: 12px;"}
+            >
+              <div class="font-semibold text-[var(--color-text)] mb-1">{m.year} · {m.role}</div>
+              <div class="text-[var(--color-text-muted)] mb-1">{m.company}</div>
+              <div class="text-[var(--color-text-subtle)] text-[11px] mb-1">{m.duration}</div>
+              <div class="text-[var(--color-text)] mt-1">{m.outcome}</div>
+            </div>
+          </a>
+        );
+      })}
+
+      <!-- Spacer for year labels -->
+      <div class="h-32"></div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="mt-4 flex flex-wrap gap-4 text-xs">
+    {[
+      { k: 'legal', l: 'Legal Ops' },
+      { k: 'data', l: 'Data Governance' },
+      { k: 'ppm', l: 'PPM' },
+      { k: 'ai', l: 'AI / Automation' },
+    ].map(({ k, l }) => (
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-3 h-3 rounded-full" style={`background:${domainColors[k as keyof typeof domainColors]}`}></span>
+        <span class="text-[var(--color-text-muted)]">{l}</span>
+      </div>
+    ))}
+  </div>
+
+  <p class="visual-caption">
+    Timeline of 9 milestones from 2002 to present, plotted by start year. Hover any dot for the role, company, and quantified outcome.
+  </p>
+</section>

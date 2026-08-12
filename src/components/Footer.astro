@@ -1,0 +1,35 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-surface)] mt-24">
+  <div class="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+    <div>
+      <div class="font-heading text-lg font-semibold">Michael McNea</div>
+      <p class="text-sm text-[var(--color-text-muted)] mt-2">
+        Enterprise data governance, legal technology, and program-portfolio operations.<br>
+        Bristow, Virginia · Open to Remote
+      </p>
+    </div>
+    <div>
+      <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3">Connect</div>
+      <ul class="space-y-2 text-sm">
+        <li><a href="mailto:private@example.invalid" class="no-underline text-[var(--color-text)] hover:text-[var(--color-accent)]">private@example.invalid</a></li>
+        <li><a href="tel:+17038513700" class="no-underline text-[var(--color-text)] hover:text-[var(--color-accent)]">703-851-3700</a></li>
+        <li><a href="https://linkedin.com/in/michaelemcnea" target="_blank" rel="noopener" class="no-underline text-[var(--color-text)] hover:text-[var(--color-accent)]">LinkedIn <span class="text-[var(--color-text-subtle)]">↗</span></a></li>
+        <li><a href="https://github.com/mmnva" target="_blank" rel="noopener" class="no-underline text-[var(--color-text)] hover:text-[var(--color-accent)]">GitHub <span class="text-[var(--color-text-subtle)]">↗</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3">Currently</div>
+      <p class="text-sm text-[var(--color-text-muted)]">
+        CDO Delegate for Freddie Mac's Legal Division. Open to Legal Ops Technology Manager, Data Governance Manager/Sr Manager/Director, and senior PPM roles.
+      </p>
+    </div>
+  </div>
+  <div class="border-t border-[var(--color-border)]">
+    <div class="max-w-6xl mx-auto px-6 py-4 text-xs text-[var(--color-text-subtle)] flex flex-wrap justify-between gap-2">
+      <span>© {year} Michael McNea. Built with Astro, deployed on Vercel.</span>
+      <a href="/sitemap-index.xml" class="no-underline hover:text-[var(--color-text-muted)]">Sitemap</a>
+    </div>
+  </div>
+</footer>

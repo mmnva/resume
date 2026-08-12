@@ -1,0 +1,94 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  tagline: string;
+  summary: string;
+  impact: { metric: string; label: string }[];
+  timeline: { role: string; company: string; period: string; detail: string }[];
+  tech: Record<string, string[]>;
+  certs: string[];
+  caseStudies: string[];
+  domainColor: string;
+  domainLabel: string;
+  description: string;
+  foundationNote?: string;
+}
+
+const { title, tagline, summary, impact, timeline, tech, certs, caseStudies, domainColor, domainLabel, description, foundationNote } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <div class="max-w-4xl mx-auto px-6 pt-16 pb-12">
+    <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3">Track · {domainLabel}</div>
+    <h1 class="mb-4">{title}</h1>
+    <p class="text-xl text-[var(--color-text-muted)] mb-6">{tagline}</p>
+    <p class="text-base text-[var(--color-text)]">{summary}</p>
+  </div>
+
+  <section class="max-w-4xl mx-auto px-6 my-12">
+    <h2 class="mb-6">Selected impact</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {impact.map(i => (
+        <div class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5">
+          <div class="font-heading text-3xl mb-1" style={`color:${domainColor}`}>{i.metric}</div>
+          <div class="text-sm text-[var(--color-text-muted)]">{i.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 my-12">
+    <h2 class="mb-6">Relevant career timeline</h2>
+    <div class="space-y-6">
+      {timeline.map(t => (
+        <div class="border-l-2 pl-6 relative" style={`border-color:${domainColor}`}>
+          <div class="absolute -left-2 top-0 w-3 h-3 rounded-full" style={`background:${domainColor}`}></div>
+          <div class="text-sm font-mono text-[var(--color-text-subtle)] mb-1">{t.period}</div>
+          <div class="font-heading text-lg mb-1">{t.role}</div>
+          <div class="text-sm text-[var(--color-text-muted)] mb-2">{t.company}</div>
+          <p class="text-[var(--color-text)]">{t.detail}</p>
+        </div>
+      ))}
+    </div>
+    {foundationNote && <p class="visual-caption mt-6">{foundationNote}</p>}
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 my-12">
+    <h2 class="mb-6">Tech stack</h2>
+    {Object.entries(tech).map(([cat, items]) => (
+      <div class="mb-6">
+        <div class="text-sm font-mono uppercase text-[var(--color-text-subtle)] mb-2">{cat}</div>
+        <div class="flex flex-wrap gap-2">
+          {items.map(item => (
+            <span class="px-3 py-1 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full text-sm">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 my-12">
+    <h2 class="mb-6">Certifications</h2>
+    <ul class="space-y-2">
+      {certs.map(c => (
+        <li class="flex items-start gap-2">
+          <span style={`color:${domainColor}`} class="mt-1">·</span>
+          <span>{c}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 my-12">
+    <h2 class="mb-6">Related case studies</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      {caseStudies.map(slug => (
+        <a href={`/case-study/${slug}/`} class="block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-5 no-underline hover:border-[var(--color-accent)] transition-colors">
+          <div class="text-sm text-[var(--color-text-muted)] mb-1">Case study</div>
+          <div class="font-medium text-[var(--color-text)] capitalize">{slug.replace(/-/g, ' ')} →</div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,20 @@
+{
+  "name": "mcnea-resume-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test:source": "node --test tests/design-contract.test.mjs tests/portfolio-data.test.mjs tests/contact-function.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.14.4",
+    "@astrojs/sitemap": "^3.6.0",
+    "@tailwindcss/vite": "^4.1.16",
+    "tailwindcss": "^4.1.16"
+  }
+}
