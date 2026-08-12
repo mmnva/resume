@@ -1,0 +1,123 @@
+---
+import { tracks } from '../data/portfolio.mjs';
+---
+
+<section id="evidence" class="evidence-desk" aria-labelledby="evidence-title" data-evidence-desk>
+  <h2 id="evidence-title" class="sr-only">Evidence by role track</h2>
+
+  <div class="track-tabs" role="tablist" aria-label="Role tracks">
+    {tracks.map((track, index) => (
+      <button
+        id={`tab-${track.id}`}
+        type="button"
+        role="tab"
+        aria-selected={index === 0 ? 'true' : 'false'}
+        aria-controls={`panel-${track.id}`}
+        tabindex={index === 0 ? 0 : -1}
+        data-track-tab={track.id}
+      >
+        {track.label}
+      </button>
+    ))}
+  </div>
+
+  {tracks.map((track, index) => (
+    <section
+      id={`panel-${track.id}`}
+      class="track-panel"
+      role="tabpanel"
+      aria-labelledby={`tab-${track.id}`}
+      hidden={index !== 0}
+      data-track-panel={track.id}
+    >
+      <p class="track-summary">{track.summary}</p>
+
+      <div class="evidence-grid">
+        {track.frames.map((frame) => (
+          <article
+            class={`evidence-frame chart-${frame.chart}`}
+            aria-labelledby={`${frame.id}-title`}
+            data-evidence-frame
+          >
+            <p class="frame-eyebrow">{frame.eyebrow}</p>
+            <h3 id={`${frame.id}-title`}>{frame.title}</h3>
+
+            <div class="metric-list" role="list">
+              {frame.metrics.map((metric) => (
+                <div class={`metric metric-${metric.tone ?? 'default'}`} role="listitem">
+                  <div class="metric-copy">
+                    <strong>
+                      {metric.value}
+                      {metric.suffix && <small>{metric.suffix}</small>}
+                    </strong>
+                    <span>{metric.label}</span>
+                  </div>
+                  {frame.chart === 'comparison' && (
+                    <span
+                      class="comparison-bar"
+                      style={`--amount:${metric.amount ?? 50}%`}
+                      aria-hidden="true"
+                    ></span>
+                  )}
+                  {frame.chart === 'progress' && (
+                    <span class="metric-track" aria-hidden="true">
+                      <span style={`--amount:${metric.amount ?? 100}%`}></span>
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <p class="source-caption">
+              Source: {frame.source.company} · {frame.source.project}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</section>
+
+<script is:inline>
+  document.querySelectorAll('[data-evidence-desk]').forEach((desk) => {
+    const tabs = Array.from(desk.querySelectorAll('[data-track-tab]'));
+    const panels = Array.from(desk.querySelectorAll('[data-track-panel]'));
+    const validTracks = new Set(tabs.map((tab) => tab.dataset.trackTab));
+
+    const selectTrack = (trackId, moveFocus = false) => {
+      if (!validTracks.has(trackId)) return;
+
+      tabs.forEach((tab) => {
+        const selected = tab.dataset.trackTab === trackId;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected && moveFocus) tab.focus();
+      });
+
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.trackPanel !== trackId;
+      });
+
+      const url = new URL(window.location.href);
+      url.searchParams.set('track', trackId);
+      history.replaceState({}, '', url);
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTrack(tab.dataset.trackTab));
+      tab.addEventListener('keydown', (event) => {
+        let nextIndex;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        if (nextIndex === undefined) return;
+        event.preventDefault();
+        selectTrack(tabs[nextIndex].dataset.trackTab, true);
+      });
+    });
+
+    const requestedTrack = new URL(window.location.href).searchParams.get('track');
+    if (requestedTrack && validTracks.has(requestedTrack)) selectTrack(requestedTrack);
+  });
+</script>

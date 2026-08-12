@@ -203,6 +203,220 @@ svg {
   color: var(--cranberry);
 }
 
+.evidence-desk {
+  overflow: hidden;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--ultrawhite) 88%, #fff);
+}
+
+.track-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: color-mix(in srgb, var(--daydream) 42%, var(--ultrawhite));
+}
+
+.track-tabs button {
+  min-height: 3.2rem;
+  border: 0;
+  border-right: 1px solid var(--rule);
+  background: transparent;
+  color: var(--deep-blue);
+  padding: 0.75rem 1rem;
+  font-size: clamp(0.83rem, 1.25vw, 0.98rem);
+  font-weight: 750;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color var(--motion-fast), color var(--motion-fast);
+}
+
+.track-tabs button:last-child {
+  border-right: 0;
+}
+
+.track-tabs button:hover {
+  background: color-mix(in srgb, var(--blue-chip) 9%, transparent);
+}
+
+.track-tabs button[aria-selected='true'] {
+  background: var(--blue-chip);
+  color: var(--ultrawhite);
+}
+
+.track-panel {
+  padding: clamp(1rem, 2vw, 1.5rem);
+}
+
+.track-panel[hidden] {
+  display: none;
+}
+
+.track-summary {
+  margin-bottom: 1rem;
+  color: var(--deep-blue);
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+  line-height: 1.5;
+}
+
+.evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.evidence-frame {
+  display: flex;
+  min-height: 20.5rem;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--ultrawhite) 94%, #fff);
+  padding: 1rem;
+}
+
+.frame-eyebrow {
+  margin-bottom: 0.3rem;
+  color: var(--blue-chip);
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.evidence-frame h3 {
+  margin-bottom: 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.metric-list {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.metric {
+  position: relative;
+  display: grid;
+  gap: 0.45rem;
+  border-bottom: 1px solid var(--rule);
+  padding: 0 0 0.75rem;
+}
+
+.metric:last-child {
+  border-bottom: 0;
+}
+
+.metric-copy {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+}
+
+.metric strong {
+  flex: 0 0 auto;
+  color: var(--blue-chip);
+  font-family: var(--font-heading);
+  font-size: clamp(1.9rem, 3vw, 2.85rem);
+  font-weight: 650;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+.metric-positive strong {
+  color: #708236;
+}
+
+.metric-cranberry strong {
+  color: var(--cranberry);
+}
+
+.metric strong small {
+  margin-left: 0.35rem;
+  color: var(--muted-ink);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.metric-copy > span {
+  color: var(--ink);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.comparison-bar,
+.metric-track {
+  display: block;
+  width: 100%;
+  height: 0.36rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--daydream) 72%, var(--ultrawhite));
+}
+
+.comparison-bar::before,
+.metric-track > span {
+  display: block;
+  width: var(--amount);
+  height: 100%;
+  border-radius: inherit;
+  background: var(--blue-chip);
+  content: '';
+  transform-origin: left;
+  animation: reveal-bar 640ms ease-out both;
+}
+
+.metric-positive .comparison-bar::before,
+.metric-positive .metric-track > span,
+.metric-track > span {
+  background: #7d923e;
+}
+
+.metric-cranberry .comparison-bar::before {
+  background: var(--cranberry);
+}
+
+.chart-units .metric {
+  grid-template-columns: 1fr;
+  min-height: 4rem;
+  align-content: center;
+}
+
+.chart-units .metric::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.32rem;
+  height: 2.1rem;
+  border-radius: 999px;
+  background: var(--lime-rickey);
+  content: '';
+  translate: 0 -50%;
+}
+
+.chart-units .metric-copy {
+  padding-left: 0.8rem;
+}
+
+.source-caption {
+  margin: auto 0 0;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.75rem;
+  color: var(--muted-ink);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+@keyframes reveal-bar {
+  from {
+    scale: 0 1;
+  }
+}
+
 @media (max-width: 63.99rem) {
   html {
     scroll-padding-top: 6rem;
@@ -213,6 +427,14 @@ svg {
     margin-left: 0;
     padding: 7.25rem clamp(1rem, 4vw, 2rem) 2rem;
   }
+
+  .evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-frame {
+    min-height: 0;
+  }
 }
 
 @media (max-width: 38rem) {
@@ -222,6 +444,21 @@ svg {
 
   .button {
     width: 100%;
+  }
+
+  .track-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .track-tabs button {
+    min-height: 2.9rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+  }
+
+  .track-tabs button:last-child {
+    border-bottom: 0;
   }
 }
 
