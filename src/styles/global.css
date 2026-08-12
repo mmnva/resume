@@ -71,7 +71,7 @@ h4 {
 }
 
 h1 {
-  font-size: clamp(3rem, 6.4vw, 5.8rem);
+  font-size: clamp(3rem, 4.5vw, 4.25rem);
 }
 
 h2 {
@@ -270,7 +270,7 @@ svg {
 .evidence-canvas {
   width: min(100%, var(--content-max));
   margin-left: var(--rail-width);
-  padding: clamp(1.5rem, 3vw, 3rem);
+  padding: clamp(1.5rem, 2.25vw, 2.25rem);
 }
 
 .hero {
@@ -278,8 +278,8 @@ svg {
   grid-template-columns: minmax(0, 1fr) minmax(12rem, 18rem);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  min-height: 25rem;
-  padding: 0 0 clamp(2rem, 4vw, 3.5rem);
+  min-height: 0;
+  padding: 0 0 clamp(1.5rem, 2.5vw, 2.25rem);
 }
 
 .hero h1 {
@@ -385,7 +385,11 @@ svg {
 }
 
 .track-tabs button {
+  display: flex;
   min-height: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   border: 0;
   border-right: 1px solid var(--rule);
   background: transparent;
@@ -434,7 +438,7 @@ svg {
 
 .evidence-frame {
   display: flex;
-  min-height: 20.5rem;
+  min-height: 17.5rem;
   flex-direction: column;
   border: 1px solid var(--rule);
   border-radius: var(--radius-sm);
@@ -487,7 +491,7 @@ svg {
   flex: 0 0 auto;
   color: var(--blue-chip);
   font-family: var(--font-heading);
-  font-size: clamp(1.9rem, 3vw, 2.85rem);
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
   font-weight: 650;
   letter-spacing: -0.035em;
   line-height: 0.95;
@@ -582,7 +586,7 @@ svg {
 .portfolio-section {
   scroll-margin-top: 1rem;
   border-top: 1px solid var(--rule-strong);
-  padding: clamp(3.5rem, 7vw, 6rem) 0;
+  padding: clamp(3.25rem, 5vw, 4.5rem) 0;
 }
 
 .section-heading {
@@ -1093,6 +1097,7 @@ svg {
     min-height: 2.9rem;
     border-right: 0;
     border-bottom: 1px solid var(--rule);
+    justify-content: flex-start;
     text-align: left;
   }
 

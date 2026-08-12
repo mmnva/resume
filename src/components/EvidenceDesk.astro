@@ -1,5 +1,12 @@
 ---
 import { tracks } from '../data/portfolio.mjs';
+import SiteIcon from './SiteIcon.astro';
+
+const trackIcons = {
+  'legal-operations': 'cases',
+  'data-governance': 'evidence',
+  'program-portfolio': 'timeline',
+} as const;
 ---
 
 <section id="evidence" class="evidence-desk" aria-labelledby="evidence-title" data-evidence-desk>
@@ -16,7 +23,8 @@ import { tracks } from '../data/portfolio.mjs';
         tabindex={index === 0 ? 0 : -1}
         data-track-tab={track.id}
       >
-        {track.label}
+        <SiteIcon name={trackIcons[track.id]} size={18} />
+        <span>{track.label}</span>
       </button>
     ))}
   </div>
