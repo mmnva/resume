@@ -23,3 +23,8 @@ test('approved palette is present', async () => {
 test('approved portrait is preserved in the asset pipeline', async () => {
   await access(new URL('src/assets/michael-mcnea-portrait.jpeg', root));
 });
+
+test('crawl policy allows the public portfolio', async () => {
+  const robots = await readFile(new URL('../public/robots.txt', import.meta.url), 'utf8');
+  assert.equal(robots, 'User-agent: *\nAllow: /\n');
+});

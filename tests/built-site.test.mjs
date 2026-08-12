@@ -48,3 +48,18 @@ test('public HTML contains no direct email or phone link', () => {
   assert.doesNotMatch(html, /mailto:|tel:/i);
   assert.doesNotMatch(html, /@gmail\.com|703[-\s.]?851[-\s.]?3700/i);
 });
+
+test('built page contains no known dead internal routes', () => {
+  assert.doesNotMatch(html, /href="\/(track|case-study|contact)\//);
+  assert.doesNotMatch(html, /href="\/Michael_McNea_Resume\.pdf"/);
+});
+
+test('metadata and footer identify the Cloudflare production target', () => {
+  assert.match(html, /https:\/\/michael-mcnea\.pages\.dev\//);
+  assert.match(html, /Built with Astro · Hosted on Cloudflare/);
+});
+
+test('obsolete public contact details are absent from tracked source', async () => {
+  const footerPath = new URL('../src/components/Footer.astro', import.meta.url);
+  await assert.rejects(() => readFile(footerPath, 'utf8'));
+});

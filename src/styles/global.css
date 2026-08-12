@@ -927,6 +927,20 @@ svg {
   font-weight: 700;
 }
 
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--rule-strong);
+  color: var(--muted-ink);
+  padding: 1.25rem 0;
+  font-size: 0.72rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
 @keyframes reveal-bar {
   from {
     scale: 0 1;
@@ -1127,6 +1141,10 @@ svg {
 
   .career-strip h3 {
     min-height: 0;
+  }
+
+  .site-footer {
+    flex-direction: column;
   }
 }
 
