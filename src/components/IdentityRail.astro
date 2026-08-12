@@ -1,0 +1,58 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/michael-mcnea-portrait.jpeg';
+import SiteIcon from './SiteIcon.astro';
+
+const navigation = [
+  { id: 'overview', label: 'Overview', icon: 'overview' },
+  { id: 'evidence', label: 'Evidence', icon: 'evidence' },
+  { id: 'case-studies', label: 'Case Studies', icon: 'cases' },
+  { id: 'career', label: 'Career Timeline', icon: 'timeline' },
+  { id: 'credentials', label: 'Credentials', icon: 'credentials' },
+  { id: 'contact', label: 'Contact', icon: 'contact' },
+] as const;
+---
+
+<aside class="identity-rail" aria-label="Profile and section navigation">
+  <div class="rail-profile">
+    <a class="portrait-link" href="#overview" aria-label="Michael McNea — return to overview">
+      <Image
+        src={portrait}
+        alt="Michael McNea"
+        widths={[96, 160, 240, 320]}
+        sizes="(max-width: 63.99rem) 48px, 160px"
+        class="portrait"
+        loading="eager"
+        format="webp"
+      />
+      <span class="monogram" aria-hidden="true">MM</span>
+    </a>
+
+    <div class="rail-identity-copy">
+      <p class="rail-name">Michael McNea, CDMP</p>
+      <p class="rail-role">Strategic operator<br />Data · Technology · People</p>
+    </div>
+  </div>
+
+  <nav class="rail-nav" aria-label="Portfolio sections">
+    {navigation.map((item, index) => (
+      <a href={`#${item.id}`} aria-current={index === 0 ? 'location' : undefined}>
+        <SiteIcon name={item.icon} size={18} />
+        <span>{item.label}</span>
+      </a>
+    ))}
+  </nav>
+
+  <div class="rail-socials" aria-label="External profiles">
+    <a href="https://linkedin.com/in/michaelemcnea">
+      <SiteIcon name="linkedin" size={19} />
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://github.com/mmnva/resume">
+      <SiteIcon name="github" size={19} />
+      <span>GitHub</span>
+    </a>
+  </div>
+
+  <p class="rail-signoff">Turning complexity into clarity.<br />Ideas into impact.</p>
+</aside>

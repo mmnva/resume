@@ -1,94 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EvidenceDesk from '../components/EvidenceDesk.astro';
+import IdentityRail from '../components/IdentityRail.astro';
+import SiteIcon from '../components/SiteIcon.astro';
 
-const description = "Michael McNea, CDMP — Legal Operations, Data Governance, and Project/Program/Portfolio Management. CDO Delegate for Freddie Mac's Legal Division. 20+ years enterprise data, legal tech, and program-portfolio operations.";
+const description =
+  'Michael McNea, CDMP — source-backed outcomes across data governance, legal technology, legal operations, and enterprise program leadership.';
 ---
+
 <BaseLayout title="Michael McNea" description={description}>
-  <!-- HERO -->
-  <section class="max-w-6xl mx-auto px-6 pt-16 pb-12">
-    <div class="grid md:grid-cols-[2fr,1fr] gap-12 items-start">
-      <div>
-        <div class="flex items-center gap-3 mb-6">
-          <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
-          <span class="text-sm font-mono uppercase tracking-wider text-[var(--color-text-subtle)]">Open to opportunities</span>
+  <div class="site-shell">
+    <IdentityRail />
+
+    <div class="evidence-canvas">
+      <section id="overview" class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <h1 id="page-title">Michael McNea, CDMP</h1>
+          <p class="hero-tracks">Data Governance · Legal Technology · Legal Operations</p>
+          <span class="hero-rule" aria-hidden="true"></span>
+          <p class="hero-statement">
+            I design systems, align stakeholders, and deliver measurable outcomes at the
+            intersection of data, technology, and the business of law.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#evidence">
+              View Evidence
+              <SiteIcon name="arrow" size={18} />
+            </a>
+          </div>
         </div>
-        <h1 class="mb-4">Michael McNea, CDMP</h1>
-        <p class="text-xl text-[var(--color-text-muted)] mb-6 leading-relaxed">
-          I build enterprise data governance, legal technology, and program-portfolio operations that withstand regulatory scrutiny and are actually used by the business.
+
+        <p class="hero-aside">
+          Executive evidence.<br />
+          Built for decisions<br />
+          that move the business forward.
         </p>
-        <p class="text-base text-[var(--color-text)] mb-8">
-          Currently CDO Delegate for Freddie Mac's Legal Division — coordinating DAMA-aligned framework, Collibra-based lineage, stewardship, data quality KPIs, and AI governance under FHFA expectations.
-        </p>
-        <div class="flex flex-wrap gap-3 mb-8">
-          <span class="px-3 py-1.5 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-full text-sm">Legal Ops · CLM, eBilling, Matter Mgmt</span>
-          <span class="px-3 py-1.5 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-full text-sm">Data Governance · DAMA, Collibra, CDE</span>
-          <span class="px-3 py-1.5 bg-[var(--color-surface-2)] border border-[var(--color-border)] rounded-full text-sm">PPM · $1M+ portfolios, vendor POC</span>
-        </div>
-        <div class="flex flex-wrap gap-4">
-          <a href="/contact/" class="inline-flex items-center px-5 py-2.5 bg-[var(--color-accent)] text-white rounded-md font-medium no-underline hover:bg-[var(--color-accent)]/90">
-            Contact me
-          </a>
-          <a href="/Michael_McNea_Resume.pdf" download class="inline-flex items-center gap-2 px-5 py-2.5 border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] rounded-md font-medium no-underline hover:border-[var(--color-accent)]">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v8m0 0L4 6m3 3l3-3M2 11h10"/></svg>
-            Download Resume
-          </a>
-        </div>
-      </div>
+      </section>
 
-      <aside class="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6 text-sm">
-        <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3">Currently</div>
-        <div class="font-medium mb-1">CDO Delegate, Legal Division</div>
-        <div class="text-[var(--color-text-muted)] mb-4">Freddie Mac · McLean, VA · Jun 2024 – Present</div>
-
-        <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3">Open to</div>
-        <ul class="space-y-2 text-[var(--color-text)]">
-          <li>· Legal Ops Technology Manager</li>
-          <li>· Data Governance Manager / Sr Manager / Director</li>
-          <li>· Senior Program/Portfolio Manager (legal/data)</li>
-        </ul>
-
-        <div class="text-xs font-mono uppercase text-[var(--color-text-subtle)] mb-3 mt-6">Based in</div>
-        <div class="text-[var(--color-text-muted)]">Bristow, Virginia · Open to Remote</div>
-      </aside>
+      <EvidenceDesk />
     </div>
-  </section>
-
-  <div class="max-w-6xl mx-auto px-6">
-    <EvidenceDesk />
   </div>
-
-  <!-- TRACK CARDS -->
-  <section class="max-w-6xl mx-auto px-6 my-16">
-    <h2 class="mb-2">Pick the track that matches the role</h2>
-    <p class="text-[var(--color-text-muted)] max-w-3xl mb-8">
-      Each track leads with the role you're hiring for — with the evidence and tools that match.
-    </p>
-    <div class="grid md:grid-cols-3 gap-6">
-      <a href="/track/legal-ops/" class="block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6 no-underline hover:border-[var(--color-legal)] transition-colors">
-        <div class="w-3 h-3 rounded-full bg-[var(--color-legal)] mb-4"></div>
-        <h3 class="text-xl mb-2 text-[var(--color-text)]">Legal Operations</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-4">
-          CLM, eBilling, Matter Management, AI document automation. Currently CDO Delegate for Freddie Mac Legal Division.
-        </p>
-        <div class="text-sm font-medium text-[var(--color-accent)]">Explore track →</div>
-      </a>
-      <a href="/track/data-governance/" class="block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6 no-underline hover:border-[var(--color-data)] transition-colors">
-        <div class="w-3 h-3 rounded-full bg-[var(--color-data)] mb-4"></div>
-        <h3 class="text-xl mb-2 text-[var(--color-text)]">Data Governance</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-4">
-          DAMA-DMBOK, Collibra lineage, Critical Data Element programs, change management that actually sticks.
-        </p>
-        <div class="text-sm font-medium text-[var(--color-accent)]">Explore track →</div>
-      </a>
-      <a href="/track/project-portfolio-management/" class="block bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-6 no-underline hover:border-[var(--color-ppm)] transition-colors">
-        <div class="w-3 h-3 rounded-full bg-[var(--color-ppm)] mb-4"></div>
-        <h3 class="text-xl mb-2 text-[var(--color-text)]">Project/Program/Portfolio Management</h3>
-        <p class="text-sm text-[var(--color-text-muted)] mb-4">
-          $1.5M+ portfolio ownership, cross-functional leadership, vendor POC discipline, enterprise tech transformation.
-        </p>
-        <div class="text-sm font-medium text-[var(--color-accent)]">Explore track →</div>
-      </a>
-    </div>
-  </section>
 </BaseLayout>

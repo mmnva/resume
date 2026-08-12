@@ -14,7 +14,7 @@
 - Present exactly three evidence frames per track; expose exact values in visible text and a programmatic text equivalent.
 - Use the supplied portrait without AI retouching, background replacement, facial reshaping, or filters.
 - Publish no phone number or email address in rendered HTML or tracked source.
-- LinkedIn is `https://linkedin.com/in/michaelemcnea`; GitHub is `https://github.com/mmnva`.
+- LinkedIn is `https://linkedin.com/in/michaelemcnea`; GitHub is `https://github.com/mmnva/resume`.
 - CDMP was achieved in February 2026; remove the stale `expected Jan 2026` copy.
 - Do not add a chart library, client framework, remote font, analytics, CMS, database, or third-party form processor.
 - The contact application must not persist or log names, addresses, message bodies, or raw payloads.
@@ -436,7 +436,7 @@ const navigation = [
   </nav>
   <div class="rail-socials">
     <a href="https://linkedin.com/in/michaelemcnea"><SiteIcon name="linkedin" />LinkedIn</a>
-    <a href="https://github.com/mmnva"><SiteIcon name="github" />GitHub</a>
+    <a href="https://github.com/mmnva/resume"><SiteIcon name="github" />GitHub</a>
   </div>
 </aside>
 ```

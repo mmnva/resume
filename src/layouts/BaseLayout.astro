@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -18,6 +16,7 @@ const {
 const siteName = "Michael McNea";
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageURL = new URL(ogImage, Astro.site).toString();
 ---
 <!doctype html>
 <html lang="en">
@@ -25,7 +24,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#fafaf9" />
+    <meta name="theme-color" content="#083B55" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalURL} />
 
@@ -37,7 +36,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -46,10 +45,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
-    <Header />
     <main id="main">
       <slot />
     </main>
-    <Footer />
   </body>
 </html>

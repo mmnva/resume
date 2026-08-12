@@ -23,7 +23,7 @@ The experience should read as an executive evidence dossier with selective dashb
 - The supplied portrait is presented crisply without AI alteration and remains well cropped across breakpoints.
 - Contact submissions are handled by a Cloudflare Pages Function, emailed to a verified destination, and not written to application storage or logs.
 - No public phone number or email address appears in rendered HTML.
-- LinkedIn points to `https://linkedin.com/in/michaelemcnea` and GitHub points to `https://github.com/mmnva`.
+- LinkedIn points to `https://linkedin.com/in/michaelemcnea` and GitHub points to the portfolio source repository at `https://github.com/mmnva/resume`.
 - CDMP is described as achieved in February 2026 everywhere it appears.
 
 ## Approved visual direction
@@ -231,7 +231,7 @@ Avoid proficiency ratings and visual heatmaps.
 ### Public presentation
 
 - LinkedIn: `https://linkedin.com/in/michaelemcnea`
-- GitHub: `https://github.com/mmnva`
+- GitHub: `https://github.com/mmnva/resume`
 - No public phone number
 - No public email address
 - Contact fields: name, reply email, company or role (optional), and message

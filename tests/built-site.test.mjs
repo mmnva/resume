@@ -23,3 +23,13 @@ test('approved track labels and strongest proof points are rendered', () => {
     assert.ok(html.includes(copy), `missing built copy: ${copy}`);
   }
 });
+
+test('hero and identity rail match the approved recruiter-first concept', () => {
+  assert.match(html, /class="identity-rail"/);
+  assert.match(html, /Michael McNea, CDMP/);
+  assert.match(html, /Data Governance · Legal Technology · Legal Operations/);
+  assert.match(html, /View Evidence/);
+  assert.match(html, /https:\/\/linkedin\.com\/in\/michaelemcnea/);
+  assert.match(html, /https:\/\/github\.com\/mmnva\/resume/);
+  assert.doesNotMatch(html, /Michael_McNea_Resume\.pdf/);
+});
