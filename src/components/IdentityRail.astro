@@ -56,3 +56,33 @@ const navigation = [
 
   <p class="rail-signoff">Turning complexity into clarity.<br />Ideas into impact.</p>
 </aside>
+
+<script>
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.rail-nav a[href^="#"]'));
+  const sections = links
+    .map((link) => document.querySelector<HTMLElement>(link.hash))
+    .filter((section): section is HTMLElement => section !== null);
+
+  const setCurrentSection = (sectionId: string) => {
+    links.forEach((link) => {
+      if (link.hash === `#${sectionId}`) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const currentSection = entries.find((entry) => entry.isIntersecting);
+      if (currentSection) setCurrentSection(currentSection.target.id);
+    },
+    { rootMargin: '-15% 0px -70% 0px' },
+  );
+
+  sections.forEach((section) => observer.observe(section));
+  links.forEach((link) => {
+    link.addEventListener('click', () => setCurrentSection(link.hash.slice(1)));
+  });
+</script>

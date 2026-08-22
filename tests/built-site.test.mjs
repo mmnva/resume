@@ -34,6 +34,10 @@ test('hero and identity rail match the approved recruiter-first concept', () => 
   assert.doesNotMatch(html, /Michael_McNea_Resume\.pdf/);
 });
 
+test('identity rail updates its current section while the page scrolls', () => {
+  assert.match(html, /IntersectionObserver/);
+});
+
 test('downstream sections are present and source-backed', () => {
   for (const id of ['case-studies', 'career', 'credentials', 'contact']) {
     assert.match(html, new RegExp(`id="${id}"`));
