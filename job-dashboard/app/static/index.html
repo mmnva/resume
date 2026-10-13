@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Pipeline</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 2h14L10 8v6l-4-2V8z' fill='%234f7cff'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14171f;--mute:#667085;--line:#e4e7ec;--accent:#4f7cff;--good:#12a05c;--warn:#d98a00;--bad:#d64545;
+--s1:#4f7cff;--s2:#7a9bff;--s3:#12a05c;--s4:#8b5cf6;--s5:#d98a00}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b22;--ink:#e8ebf1;--mute:#8b93a3;--line:#262c36;--accent:#6b93ff;--good:#34c27a;--warn:#f0a93a;--bad:#ee6b6b;--s1:#6b93ff;--s2:#4a67b8;--s3:#34c27a;--s4:#a78bfa;--s5:#f0a93a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 40px}
+header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+h1{font-size:20px;margin:0}h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 12px;font-weight:600}
+.meta{color:var(--mute);font-size:12px}.meta button{font:inherit;color:var(--accent);background:none;border:0;cursor:pointer;padding:0 0 0 8px}
+.grid{display:grid;gap:12px}.kpis{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:12px}
+.two{grid-template-columns:repeat(auto-fit,minmax(340px,1fr));margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.kpi .v{font-size:28px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.1}.kpi .l{color:var(--mute);font-size:12px;margin-top:4px}.kpi .s{font-size:11px;color:var(--mute)}
+.funnel .row{display:grid;grid-template-columns:130px 1fr 230px;gap:12px;align-items:center;margin:7px 0}
+.funnel .track{display:flex;align-items:center;gap:8px;font-weight:600;font-variant-numeric:tabular-nums}.funnel .bar{height:30px;flex:none;border-radius:6px;min-width:3px;display:flex;align-items:center;padding-left:10px;color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+.funnel .conv{font-size:12px;color:var(--mute);text-align:right}.funnel .conv b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}th{font-size:11px;color:var(--mute);font-weight:600;text-transform:uppercase}tr:last-child td{border:0}
+.mini .row{display:grid;grid-template-columns:130px 1fr 40px;gap:8px;align-items:center;margin:5px 0;font-size:13px}
+.mini .bar{height:10px;border-radius:5px;background:var(--s2)}.mini .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--mute)}
+.legend{display:flex;gap:14px;font-size:12px;color:var(--mute);margin-bottom:6px}.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+svg text{fill:var(--mute);font-size:10px}.empty{color:var(--mute)}.banner{background:var(--card);border:1px solid var(--bad);color:var(--bad);border-radius:10px;padding:10px 14px;margin-bottom:12px}
+.warnrow{color:var(--warn)}a{color:var(--accent);text-decoration:none}
+@media(max-width:560px){.funnel .row{grid-template-columns:90px 1fr}.funnel .conv{grid-column:1/-1;text-align:left}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Job Pipeline</h1><div class="meta" id="meta">Loading…</div></header>
+<div id="banner"></div>
+<section class="grid kpis" id="kpis"></section>
+<section class="card funnel"><h2>Funnel — found to offer</h2><div id="funnel"></div></section>
+<section class="grid two">
+  <div class="card"><h2>Weekly activity (12 wks)</h2><div id="weekly"></div></div>
+  <div class="card"><h2>Speed &amp; quality</h2><div id="speed"></div></div>
+</section>
+<section class="grid two">
+  <div class="card"><h2>By source</h2><div id="sources"></div></div>
+  <div class="card"><h2>By resume track</h2><div id="resumes"></div></div>
+</section>
+<section class="grid two">
+  <div class="card mini"><h2>Current status</h2><div id="status"></div></div>
+  <div class="card mini"><h2>Fit score distribution</h2><div id="fit"></div></div>
+</section>
+<section class="grid two">
+  <div class="card"><h2>Upcoming interviews</h2><div id="upcoming"></div></div>
+  <div class="card"><h2>Tailoring &amp; data quality</h2><div id="tail"></div></div>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id), esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct=v=>v==null?'—':v+'%', num=v=>v==null?'—':v;
+const COLORS=['--s1','--s2','--s5','--s4','--s3'];
+function kpi(v,l,s){return `<div class="card kpi"><div class="v">${v}</div><div class="l">${l}</div>${s?`<div class="s">${s}</div>`:''}</div>`}
+function miniBars(items,key='count',label='name'){const m=Math.max(1,...items.map(i=>i[key]));
+  return items.map(i=>`<div class="row"><span>${esc(i[label])}</span><div><div class="bar" style="width:${i[key]/m*100}%"></div></div><span class="n">${i[key]}</span></div>`).join('')||'<div class="empty">No data</div>'}
+function breakdown(rows){return `<table><tr><th></th><th>Found</th><th>Applied</th><th>Intv</th><th>Apply %</th><th>Intv %</th></tr>`+
+  rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.found}</td><td>${r.applied}</td><td>${r.interview}</td><td>${pct(r.apply_rate)}</td><td>${pct(r.interview_rate)}</td></tr>`).join('')+'</table>'}
+function weekly(w){const W=520,H=190,pl=26,pb=22,n=w.length,bw=(W-pl)/n,m=Math.max(1,...w.map(x=>Math.max(x.found,x.applied,x.interview)));
+  const y=v=>H-pb-(v/m)*(H-pb-8);let s=`<div class="legend"><span><i style="background:var(--s2)"></i>Found</span><span><i style="background:var(--s5)"></i>Applied</span><span><i style="background:var(--s4)"></i>Interview</span></div><svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Weekly found, applied, interview counts">`;
+  [0,.5,1].forEach(t=>{const v=Math.round(m*t);s+=`<line x1="${pl}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--line)"/><text x="0" y="${y(v)+3}">${v}</text>`});
+  w.forEach((x,i)=>{const x0=pl+i*bw+2,b=(bw-4)/3;[['found','--s2'],['applied','--s5'],['interview','--s4']].forEach(([k,c],j)=>{
+    s+=`<rect x="${x0+j*b}" y="${y(x[k])}" width="${b-1}" height="${H-pb-y(x[k])}" rx="1.5" fill="var(${c})"><title>${x.week}: ${x[k]} ${k}</title></rect>`});
+    if(i%2==0||n<7)s+=`<text x="${x0}" y="${H-6}">${x.week.slice(5)}</text>`});
+  return s+'</svg>'}
+function render(d){
+  const k=d.kpis,f=d.funnel,fo=f[0].count,ap=f[2].count,iv=f[3].count,of=f[4].count;
+  $('meta').innerHTML=`${d.total} jobs tracked · updated ${new Date(d.generated_at).toLocaleTimeString()}<button id="rf">refresh</button>`;
+  $('rf').onclick=()=>load(true);
+  $('banner').innerHTML=d.stale_error?`<div class="banner">Showing cached data — last refresh failed: ${esc(d.stale_error)}</div>`:'';
+  $('kpis').innerHTML=kpi(fo,'Found',`+${k.found_7d} last 7d`)+kpi(k.in_review,'In review','awaiting decision')+kpi(ap,'Applied',`+${k.applied_7d} last 7d · ${pct(k.apply_rate)} of found`)+
+    kpi(iv,'Interviews',`${pct(k.interview_rate)} of applied`)+kpi(of,'Offers',`${pct(k.offer_rate)} of interviews`)+kpi(num(k.avg_fit),'Avg fit score',`ATS ${num(k.avg_ats)} → ${num(k.avg_tailored_ats)} tailored`);
+  const mx=Math.max(1,fo);
+  $('funnel').innerHTML=f.map((s,i)=>{const w=Math.max(s.count/mx*100,0.8),wide=w>=8;
+    return `<div class="row"><span>${s.label}</span><div class="track"><div class="bar" style="width:${w}%;background:var(${COLORS[i%5]})">${wide?s.count:''}</div>${wide?'':`<span>${s.count}</span>`}</div>
+    <span class="conv">${i?`<b>${pct(s.step_conversion)}</b> of prev · `:''}${pct(s.pct_of_found)} of found</span></div>`}).join('');
+  $('weekly').innerHTML=weekly(d.weekly);
+  const sp=d.speed;
+  $('speed').innerHTML=`<table><tr><td>Median days found → applied</td><td>${num(sp.found_to_applied.median_days)}</td><td class="empty">n=${sp.found_to_applied.n}</td></tr>
+    <tr><td>Median days applied → interview</td><td>${num(sp.applied_to_interview.median_days)}</td><td class="empty">n=${sp.applied_to_interview.n}</td></tr>
+    <tr><td>Priority roles still open</td><td>${k.priority_open}</td><td></td></tr>
+    <tr><td>Interviews in last 30 days</td><td>${k.interviews_30d}</td><td></td></tr></table>`;
+  $('sources').innerHTML=breakdown(d.by_source);$('resumes').innerHTML=breakdown(d.by_resume);
+  $('status').innerHTML=miniBars(d.status);$('fit').innerHTML=miniBars(d.fit_distribution,'count','range');
+  $('upcoming').innerHTML=d.upcoming_interviews.length?`<table>`+d.upcoming_interviews.map(u=>`<tr><td><a href="${esc(u.url||'#')}" target="_blank" rel="noopener">${esc(u.title)}</a> <span class="empty">${esc(u.company)}</span></td><td>${u.date}</td></tr>`).join('')+'</table>':'<div class="empty">None scheduled</div>';
+  const q=d.data_quality;
+  $('tail').innerHTML=`<div class="mini">${miniBars(d.tailoring)}</div><p class="meta ${q.missing_found_date||q.missing_status?'warnrow':''}">Data gaps: ${q.missing_found_date} missing Date Found · ${q.missing_status} missing Status · ${q.interview_without_applied_date} interviews without Applied Date</p>`;
+}
+async function load(force){
+  try{const r=await fetch('/api/metrics'+(force?'?refresh=1':''));const d=await r.json();
+    if(!r.ok)throw new Error(d.error||r.status);render(d)}
+  catch(e){$('banner').innerHTML=`<div class="banner">Could not load data: ${esc(e.message)}</div>`;$('meta').textContent='Error'}
+}
+load();setInterval(load,60000);
+</script>
+</body>
+</html>

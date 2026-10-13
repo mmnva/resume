@@ -1,0 +1,3 @@
+.env
+tests/_fx.json
+__pycache__/

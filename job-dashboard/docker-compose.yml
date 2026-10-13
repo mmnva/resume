@@ -1,0 +1,9 @@
+services:
+  dashboard:
+    build: .
+    image: job-pipeline-dashboard
+    container_name: job-pipeline-dashboard
+    ports:
+      - "8080:8080"
+    env_file: .env
+    restart: unless-stopped
