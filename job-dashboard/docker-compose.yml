@@ -4,6 +4,8 @@ services:
     image: job-pipeline-dashboard
     container_name: job-pipeline-dashboard
     ports:
-      - "8080:8080"
-    env_file: .env
+      - "${HOST_PORT:-8787}:8080"
+    env_file:
+      - path: .env
+        required: false
     restart: unless-stopped
