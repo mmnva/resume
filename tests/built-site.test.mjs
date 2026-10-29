@@ -15,7 +15,7 @@ test('approved track labels and strongest proof points are rendered', () => {
   for (const copy of [
     'Legal Operations',
     'Data Governance',
-    'Program &amp; Portfolio',
+    'Program, Portfolio &amp; Operations',
     '$1.25M',
     '$17M',
     '40,000+',

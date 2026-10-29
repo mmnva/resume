@@ -113,10 +113,10 @@ export const tracks = [
       {
         id: 'data-efficiency',
         eyebrow: '3. Process improvement',
-        title: 'Manual work removed',
+        title: 'Manual work reduced',
         chart: 'progress',
         metrics: [
-          { value: '45 → 0', label: 'manual process steps', amount: 100 },
+          { value: '45 → 15', label: 'manual process steps', amount: 67 },
           { value: '100 → 40', label: 'relative cycle time', amount: 60 },
         ],
         source: {
@@ -128,9 +128,9 @@ export const tracks = [
   },
   {
     id: 'program-portfolio',
-    label: 'Program & Portfolio',
+    label: 'Program, Portfolio & Operations',
     summary:
-      'Programs and portfolios that deliver financial value, enterprise scale, and dependable execution.',
+      'Program, portfolio, and operations management that delivers financial value, enterprise scale, and dependable execution across industries.',
     frames: [
       {
         id: 'ppm-impact',
@@ -213,7 +213,7 @@ export const featuredCases = [
   },
   {
     id: 'ariba-migration',
-    track: 'Program & Portfolio',
+    track: 'Program, Portfolio & Operations',
     title: 'Ariba and SharePoint migration',
     company: 'Micron Technology',
     period: '2013–2016',
@@ -252,8 +252,9 @@ export const careerStages = [
   {
     title: 'Today',
     period: '2024–present',
-    role: 'Enterprise data strategy and governance',
-    detail: 'Aligning law, data, technology, and measurable business outcomes.',
+    role: 'Operations | Governance leadership',
+    detail:
+      'Leading operations, legal technology, and governance programs while building toward AI engineering leadership through AI-assisted workflows, automation, and data platforms.',
   },
 ];
 
